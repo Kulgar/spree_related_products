@@ -16,7 +16,7 @@ module RelatedProducts
       module ClassMethods
         # Returns all the Spree::RelationType's which apply_to this class.
         def relation_types
-          Spree::RelationType.where(applies_to: to_s).order(:name)
+          ::Spree::RelationType.where(applies_to: to_s).order(:name)
         end
 
         # The AREL Relations that will be used to filter the resultant items.
@@ -65,7 +65,7 @@ module RelatedProducts
         # First we destroy relationships "from" this Product to others.
         relations.destroy_all
         # Next we destroy relationships "to" this Product.
-        Spree::Relation.where(related_to_type: self.class.to_s).where(related_to_id: id).destroy_all
+        ::Spree::Relation.where(related_to_type: self.class.to_s).where(related_to_id: id).destroy_all
       end
 
       private
