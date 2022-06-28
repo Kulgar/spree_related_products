@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Spree
-  module RelatedProducts
+module RelatedProducts
+  module Spree
     module ProductDecorator
       def self.prepended(base)
         base.has_many :relations, -> { order(:position) }, class_name: 'Spree::Relation', as: :relatable
@@ -117,4 +117,4 @@ module Spree
   end
 end
 
-::Spree::Product.prepend(Spree::RelatedProducts::ProductDecorator)
+::Spree::Product.prepend(RelatedProducts::Spree::ProductDecorator) if ::Spree::Product.included_modules.exclude?(RelatedProducts::Spree::ProductDecorator)
